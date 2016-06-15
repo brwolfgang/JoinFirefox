@@ -31,7 +31,7 @@
     },
     "browser_action": {
         "browser_style": true,
-        "default_icon": "icon/con.png",
+        "default_icon": "icons/icon.png",
         "default_popup": "devices.html"
     },
     "web_accessible_resources": [
