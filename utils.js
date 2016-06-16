@@ -13,7 +13,7 @@ var EVENT_SMS_HANDLED = "smshandled";
 var JOIN_ICON = "icon.png";
 var ICON_DATA_PREFIX = "data:image/jpeg;base64,";
 var CHROME_EXTENSION_URL = "chrome-extension://flejfacjooompmliegamfbpjjdlhokhj/";
-var DEVICES_POPUP_URL = CHROME_EXTENSION_URL + "devices.html?tab=devices";
+var DEVICES_POPUP_URL = chrome.extension.getURL("devices.html") + "?tab=devices";
 var AUTH_CALLBACK_URL = "https://joinjoaomgcd.appspot.com/authorize.html";
 //var AUTH_CALLBACK_URL = "https://"+chrome.runtime.id+".chromiumapp.org/chrome-extension"
 
