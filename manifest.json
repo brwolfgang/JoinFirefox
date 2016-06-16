@@ -31,11 +31,13 @@
     },
     "browser_action": {
         "browser_style": true,
+        "default_title": "Join",
         "default_icon": "icons/icon.png",
         "default_popup": "devices.html"
     },
     "web_accessible_resources": [
-        "icons/medium.png"
+        "icons/medium.png",
+        "options.html"
     ],
     "background": {
         "scripts": [
