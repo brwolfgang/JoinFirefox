@@ -1,5 +1,4 @@
 
-var OPTIONS_URL = chrome.extension.getURL("options.html");
 var isPopup = getURLParameter("popup");
 if(!isPopup){
 	chrome.extension.getBackgroundPage().popupWindow = window;
@@ -152,7 +151,7 @@ addEventListener("unload", function (event) {
 var settingsElement = document.getElementById("settings");
 var topBarPopoutElement = document.getElementById("topBarPopout");
 settingsElement.onclick = function(){
-	openTab(OPTIONS_URL);
+	chrome.runtime.openOptionsPage()
 }
 topBarPopoutElement.onclick = function(){
 	back.createPushClipboardWindow(localStorage.selectedTab);
@@ -182,7 +181,7 @@ document.onkeydown = function(e){
 }
 
 document.getElementById("optionslink").addEventListener("click",function(event){
-	openTab(OPTIONS_URL);
+	chrome.runtime.openOptionsPage();
 });
 var refreshElement = document.getElementById("topBarRefresh");
 refreshElement.addEventListener("click",function(event){
