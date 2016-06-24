@@ -1,4 +1,4 @@
-
+console.log("Loading file js/base/contextmenu");
 var ContextMenu = function(){
 	var OPEN = "Open";
 	var PASTE = "Paste";
@@ -21,7 +21,7 @@ var ContextMenu = function(){
 	}
 	//Opens
 	var openUrl = function(device, url){
-		push(device, {"url": info.pageUrl});
+		push(device, {"url": url});
 	}
 	var openPage = function(device, info, tab){
 		openUrl(device, info.pageUrl);

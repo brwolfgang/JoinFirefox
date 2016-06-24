@@ -1,24 +1,37 @@
+var deviceHtml;
+var deviceCommandsHtml;
+var deviceButtonsHtml;
+var deviceButtonHtml;
+
+window.addEventListener('HTMLImportsLoaded', function(e) {
+	deviceCommandsHtml = document.querySelector('link[href="components/device-commands.html"]').import;
+	deviceHtml = document.querySelector('link[href="components/device.html"]').import.querySelector('#device');
+	deviceButtonHtml = document.querySelector('link[href="components/device-button.html"]').import.querySelector('#devicebutton');
+	deviceButtonsHtml = document.querySelector('link[href="components/device-buttons.html"]').import.querySelector('#devicebuttons');
+
+	writeDevices()
+});
+
+
 
 var back = chrome.extension.getBackgroundPage();
 var writeDevices = function(){
 	var commandContainerElement = document.getElementById("devices");
 	commandContainerElement.innerHTML = "";
-	var deviceCommandsHtml = document.querySelector('link[href="components/device-commands.html"]').import;
-	var deviceHtml = document.querySelector('link[href="components/device.html"]').import.querySelector('#device');
-	var deviceButtonHtml = document.querySelector('link[href="components/device-button.html"]').import.querySelector('#devicebutton');
-	var deviceButtonsHtml = document.querySelector('link[href="components/device-buttons.html"]').import.querySelector('#devicebuttons');
+
+
 	var buttonsElement = null;
 	var selectedDevice = null;
 
-	var deviceHover = function(e){
+	var deviceHover = function (e) {
 		var element = e.target;
-		if(!element){
+		if (!element) {
 			return;
 		}
-		while(!element.device){
+		while (!element.device) {
 			element = element.parentElement;
 		}
-		deviceElements.doForAll(function(deviceElement){
+		deviceElements.doForAll(function (deviceElement) {
 			deviceElement.classList.remove("selecteddevice");
 		});
 		element.classList.add("selecteddevice");
@@ -29,33 +42,34 @@ var writeDevices = function(){
 			var buttonElement = buttonsElement.children[i];
 			var command = buttonElement.command;
 			var enabled = true;
-			if(selectedDevice.deviceType == DEVICE_TYPE_GROUP){
+			if (selectedDevice.deviceType == DEVICE_TYPE_GROUP) {
 				var groupId = selectedDevice.deviceId.substring(6);
-				var group = joindevices.groups.deviceGroups.allDeviceGroups.first(function(group){
+				var group = joindevices.groups.deviceGroups.allDeviceGroups.first(function (group) {
 					return group.id == groupId;
 				});
-				if(group){
+				if (group) {
 					var groups = command.showForGroups;
-					if(groups && groups.indexOf(group) >= 0){
+					if (groups && groups.indexOf(group) >= 0) {
 						enabled = true;
-					}else{
+					} else {
 						enabled = false;
 					}
 				}
-			}else{
-				if(command.condition){
-					if(!command.condition(selectedDevice)){
+			} else {
+				if (command.condition) {
+					if (!command.condition(selectedDevice)) {
 						enabled = false;
 					}
 				}
 			}
-			if(enabled){
-				buttonElement.className = buttonElement.className.replace("disabled","");
-			}else{
+			if (enabled) {
+				buttonElement.className = buttonElement.className.replace("disabled", "");
+			} else {
 				buttonElement.classList.add("disabled");
 			}
-		};
-	}
+		}
+		;
+	};
 
 	var deviceCommandsElement = deviceCommandsHtml.querySelector("#devicecommands").cloneNode(true);
 	back.getCurrentTab(function(tab){
@@ -221,6 +235,3 @@ var writeDevices = function(){
 	}
 
 }
-document.addEventListener('DOMContentLoaded', function() {
-	writeDevices();
-});

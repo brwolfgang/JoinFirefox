@@ -1,4 +1,5 @@
-var joindevices = {    
+console.log("Loading file js/joindevices");
+var joindevices = {
     "groups":{
         "DeviceGroup" : function(id, name){
             this.id = id;
@@ -14,7 +15,7 @@ var joindevices = {
             this.deviceTypeGroups[joindevices.DEVICE_TYPE_ANDROID_PHONE] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_ANDROID,joindevices.DEVICE_GROUP_PHONE];
             this.deviceTypeGroups[joindevices.DEVICE_TYPE_ANDROID_TABLET] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_ANDROID,joindevices.DEVICE_GROUP_TABLET];
             this.deviceTypeGroups[joindevices.DEVICE_TYPE_CHROME_BROWSER] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_CHROME,joindevices.DEVICE_GROUP_PC];
-            this.deviceTypeGroups[joindevices.DEVICE_TYPE_WIDNOWS_PC] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_WINDOWS10,joindevices.DEVICE_GROUP_PC];
+            this.deviceTypeGroups[joindevices.DEVICE_TYPE_WINDOWS_PC] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_WINDOWS10,joindevices.DEVICE_GROUP_PC];
             this.deviceTypeGroups[joindevices.DEVICE_TYPE_FIREFOX] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_FIREFOX,joindevices.DEVICE_GROUP_PC];
             this.deviceTypeGroups[joindevices.DEVICE_TYPE_ANDROID_TV] = [joindevices.DEVICE_GROUP_ALL,joindevices.DEVICE_GROUP_ANDROID];
             this.putDevicesIntoGroups = function(devices){
@@ -71,7 +72,7 @@ var joindevices = {
 joindevices.DEVICE_TYPE_ANDROID_PHONE = 1;
 joindevices.DEVICE_TYPE_ANDROID_TABLET = 2;
 joindevices.DEVICE_TYPE_CHROME_BROWSER = 3;
-joindevices.DEVICE_TYPE_WIDNOWS_PC = 4;
+joindevices.DEVICE_TYPE_WINDOWS_PC = 4;
 joindevices.DEVICE_TYPE_FIREFOX = 6;
 joindevices.DEVICE_TYPE_GROUP = 7;
 joindevices.DEVICE_TYPE_ANDROID_TV = 8;

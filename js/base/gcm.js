@@ -1,4 +1,5 @@
-var Request = function(){    
+console.log("Loading file js/base/gcm");
+var Request = function(){
     this.getParams = function() {
         var json = new Object();
         for (prop in this) {

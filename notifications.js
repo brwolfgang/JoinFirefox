@@ -1,6 +1,12 @@
-var notificationsHtml = document.querySelector('link[href="notifications.html"]').import;
-var notificationHtml = notificationsHtml.querySelector('link[href="notification.html"]').import.querySelector('#notification');
-var notificationButtonHtml = notificationsHtml.querySelector('link[href="notificationbutton.html"]').import.querySelector('#notificationbutton');
+var notificationsHtml;
+var notificationHtml;
+var notificationButtonHtml;
+
+window.addEventListener('HTMLImportsLoaded', function(e) {
+	notificationsHtml = document.querySelector('link[href="notifications.html"]').import;
+	notificationHtml = notificationsHtml.querySelector('link[href="notification.html"]').import.querySelector('#notification');
+	notificationButtonHtml = notificationsHtml.querySelector('link[href="notificationbutton.html"]').import.querySelector('#notificationbutton');
+});
 
 var notificationsElement = document.getElementById("notifications");
 var getNotifications = function(){
@@ -27,7 +33,7 @@ var getWidth = function(){
 var writeNotifications = function(){
 	notificationsElement.innerHTML = "";
 	var notifications = getNotifications();
-	if(notifications.length == 0){
+	if(!notifications || notifications.length == 0){
 		notificationsElement.innerHTML = "<h5 id='tabsplaceholder'>No notifications</h5>";
 		//document.title = "Notifications";
 		if(getURLParameter("closeOnEmpty")){
@@ -223,7 +229,7 @@ var writeNotifications = function(){
 	   // window.resizeTo(getWidth(),getHeight());
 	}
 }
-writeNotifications();
+// writeNotifications();
 
 var notificationsUpdated = function(event){
 	writeNotifications();

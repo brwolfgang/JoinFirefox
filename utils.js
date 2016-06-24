@@ -1,3 +1,5 @@
+console.log("Loading file utils")
+
 
 /*************************CONSTANTS***********************/
 
@@ -13,7 +15,7 @@ var EVENT_SMS_HANDLED = "smshandled";
 var JOIN_ICON = "icon.png";
 var ICON_DATA_PREFIX = "data:image/jpeg;base64,";
 var CHROME_EXTENSION_URL = "chrome-extension://flejfacjooompmliegamfbpjjdlhokhj/";
-var DEVICES_POPUP_URL = chrome.extension.getURL("devices.html") + "?tab=devices";
+// var DEVICES_POPUP_URL = chrome.extension.getURL("devices.html") + "?tab=devices";
 var AUTH_CALLBACK_URL = "https://joinjoaomgcd.appspot.com/authorize.html";
 //var AUTH_CALLBACK_URL = "https://"+chrome.runtime.id+".chromiumapp.org/chrome-extension"
 
@@ -797,7 +799,9 @@ var getRedirectUrl = function(url,callback){
 var onAuth = function(redirect_url){
 
 }
-var getUserInfo = function(callback,force,token){
+var getUserInfo = function(callback,force,token){''
+	console.log("Definindo dados do usuário");
+	console.log(localStorage.userinfo);
 	if(!localStorage){
 		return;
 	}
@@ -805,7 +809,7 @@ var getUserInfo = function(callback,force,token){
 		callback(JSON.parse(localStorage.userinfo));
 		return;
 	}
-	back.doGetWithAuth("https://www.googleapis.com/oauth2/v1/userinfo?alt=json", function(result){
+	callback.doGetWithAuth("https://www.googleapis.com/oauth2/v1/userinfo?alt=json", function(result){
 	  localStorage.userinfo = JSON.stringify(result);
 	  callback(result);
 	},function(error){
@@ -886,3 +890,4 @@ var setPopupIcon = function(alternative){
 
 
 /***********************************************************/
+console.log("Carregado");

@@ -1,3 +1,4 @@
+console.log("Loading file js/utils");
 var UrlUtils = {
     "getURLParameter": function(url,name) {
         if (!url) url = location.href;

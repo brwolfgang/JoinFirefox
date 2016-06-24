@@ -1,3 +1,4 @@
+console.log("Loading file js/init");
 var windowManagement = new WindowManagement();
 var authentication = new Authentication();
 var joinWebApi = new JoinWebApi();

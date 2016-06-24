@@ -1,4 +1,4 @@
-console.log("olaa Auth!!");
+console.log("Loading file js/auth");
 var Authentication = function(){
 	var AUTH_CALLBACK_URL = "https://joinjoaomgcd.appspot.com/authorize.html";
 

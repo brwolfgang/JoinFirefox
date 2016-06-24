@@ -5,6 +5,10 @@ body {
 	background: #fafafa;
 	-webkit-font-smoothing: antialiased; /*For Mac OS / OSX*/
 	margin: 0px;
+
+	/* Ported from Chrome */
+	font-family: "Segoe UI", Arial, sans-serif;
+	font-size: 75%;
 }
 h1 { color: #5a5a5a; }
 h2 {

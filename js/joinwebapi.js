@@ -1,3 +1,4 @@
+console.log("Loading file js/joinwebapi");
 var JoinWebApi = function(){
 
 	var me = this;
@@ -9,21 +10,21 @@ var JoinWebApi = function(){
 	var joinserverBase =  "https://joinjoaomgcd.appspot.com/";
 	var joinserver =  joinserverBase + "_ah/api/";
 
-	this.devices = function(callback){
-		authentication.doGetWithAuth(joinserver + "registration/v1/listDevices/", function(result){
-	      console.log(result);
-	      joindevices.storedDevices = result.records;  
-	      localStorage.devices = JSON.stringify(joindevices.storedDevices);
-	      if(callback != null){
-	        callback(result.records);
-	      }
-	    },function(error){
-	        console.log("Error getting devices: " + error);    
-	        if(callback != null){
-	            callback(null);
-	        }       
-	    });
-	}
+	this.devices = function (callback) {
+		authentication.doGetWithAuth(joinserver + "registration/v1/listDevices/", function (result) {
+			console.log(result);
+			joindevices.storedDevices = result.records;
+			localStorage.devices = JSON.stringify(joindevices.storedDevices);
+			if (callback != null) {
+				callback(result. records);
+			}
+		}, function (error) {
+			console.log("Error getting devices: " + error);
+			if (callback != null) {
+				callback(null);
+			}
+		});
+	};
 	this.push = function(push, callback, callbackError){	
         var deviceIds = push.deviceIds;
         push.deviceId = null;
