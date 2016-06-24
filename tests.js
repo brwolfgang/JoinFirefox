@@ -1,6 +1,10 @@
+var testHtml;
+
+addEventListener("HTMLImportsLoaded", function (e) {
+	testHtml = document.querySelector('link[href="test.html"]').import.querySelector('#test');
+});
 
 var back = chrome.extension.getBackgroundPage();
-var testHtml = document.querySelector('link[href="test.html"]').import.querySelector('#test');
 
 var Tests = function(){
 	var me = this;
