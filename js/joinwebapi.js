@@ -12,7 +12,7 @@ var JoinWebApi = function(){
 
 	this.devices = function (callback) {
 		authentication.doGetWithAuth(joinserver + "registration/v1/listDevices/", function (result) {
-			console.log(result);
+			console.log("Dispositivos obtidos com resultado: " + result);
 			joindevices.storedDevices = result.records;
 			localStorage.devices = JSON.stringify(joindevices.storedDevices);
 			if (callback != null) {

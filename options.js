@@ -24,16 +24,14 @@ var listDevices = function (callback) {
 	return chrome.extension.getBackgroundPage().listDevices(callback);
 };
 
-var backgroundPage = chrome.runtime.getBackgroundPage();
-// necesario pegar devicesImages de backgroundPage
 
-var deviceImages;
+var deviceImages = chrome.extension.getBackgroundPage().deviceImages;
 function setDevicesImages(window) {
 	deviceImages = window.deviceImages;
 }
 
 var getDevices = function () {
-	return chrome.extension.getBackgroundPage().devices;
+	return chrome.extension.getBackgroundPage().joindevices.storedDevices;
 };
 
 var closeOptions = function () {
@@ -238,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var element = advanced[i];
 		element.style.display = "none";
 	};
-	addOptionListeners();
+	// addOptionListeners();
 	chrome.commands.getAll(function(commands) {
 		for (var commandKey in commands) {
 			var command = commands[commandKey];
@@ -268,8 +266,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	var favoriteCommandText = document.getElementById("text_favourite_command");
 	var favoriteCommandTextArea = document.getElementById("favouritecommandtextarea");
 	var selectFavoriteCommandDevices = document.getElementById("select_favourite_command_device");
-	var devices = getDevices();
 	var htmlDevicesAutoClipboard = "";
+	var devices = getDevices();
 	for (var i = 0; i < devices.length; i++) {
 		var device = devices[i];
 		htmlDevicesAutoClipboard = htmlDevicesAutoClipboard + replaceAll(replaceAll(replaceAll(replaceAll(deviceAutoClipboardHtml,"DEVICE_NAME",device.deviceName),"DEVICE_ICON","icons/"+deviceImages[""+device.deviceType](device)),"DEVICE_CLASS","clipboardDevice"),"DEVICE_ID",device.deviceId);
@@ -294,12 +292,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		var checkboxes = devicesAutoClipboardElement.getElementsByTagName("input");
 		for (var i = 0; i < checkboxes.length; i++) {
 			var checkbox = checkboxes[i];
-			checkbox.checked = getOptionValue(checkbox.id,true);
-			addOptionListener(checkbox);
+			// checkbox.checked = getOptionValue(checkbox.id,true);
+			// addOptionListener(checkbox);
 		};
 	}
-	loadOptions();
-	setFavoriteCommandOptions();
+	// loadOptions();
+	// setFavoriteCommandOptions();
 	document.getElementById("starttests").addEventListener("click",function(){
 		var tests = new Tests();
 		tests.init();

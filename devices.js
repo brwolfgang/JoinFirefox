@@ -42,7 +42,7 @@ var getDeviceById = function(deviceId){
 	return chrome.extension.getBackgroundPage().getDeviceById(deviceId);
 }
 var doGetWithAuth = function(url, callback, callbackError) {
-	return chrome.extension.getBackgroundPage().doGetWithAuth(url, callback, callbackError);
+	return chrome.extension.getBackgroundPage().authentication.doGetWithAuth(url, callback, callbackError);
 }
 var doGetWithAuthAsyncRequest = function(endpointRequest, endpointGet, deviceId, callback, callbackError) {
 	return chrome.extension.getBackgroundPage().doGetWithAuthAsyncRequest(endpointRequest, endpointGet, deviceId, callback, callbackError);
@@ -58,16 +58,21 @@ var doWithDeviceAndCloseWindows = function(doThis){
 }
 var setUserInfo = function(){
 	getUserInfo(function(result){
+		var topBarText = document.getElementById("topBarText");
+		if (topBarText) {
+			topBarText.onclick = setUserInfo;
+		}
 		var userIconElement = document.getElementById("usericon");
-		document.getElementById("topBarText").onclick = setUserInfo;
-		userIconElement.src = result.picture;
-		userIconElement.onclick = function(){
-			back.getAuthToken(function(){
-				back.refreshDevices(function(){
-					setUserInfo();
-				});
-			},true);
-		};
+		if (userIconElement) {
+			userIconElement.src = result.picture;
+			userIconElement.onclick = function(){
+				back.getAuthToken(function(){
+					back.refreshDevices(function(){
+						setUserInfo();
+					});
+				},true);
+			};
+		}
 	});
 }
 setUserInfo();
@@ -123,10 +128,12 @@ var selectTab = function(idToShow){
 }
 var refreshTabVisibility = function(){
 	var smsTab = document.getElementById("tab-sms");
-	if(!localStorage.smsDeviceId){
-		smsTab.style.display = "none";
-	}else{
-		smsTab.style.display = "block";
+	if (smsTab) {
+		if (!localStorage.smsDeviceId) {
+			smsTab.style.display = "none";
+		} else {
+			smsTab.style.display = "block";
+		}
 	}
 }
 refreshTabVisibility();
@@ -149,13 +156,17 @@ addEventListener("unload", function (event) {
 	back.dispatch("popupunloaded");
 }, true);
 var settingsElement = document.getElementById("settings");
-var topBarPopoutElement = document.getElementById("topBarPopout");
-settingsElement.onclick = function(){
-	chrome.runtime.openOptionsPage()
+if (settingsElement) {
+	settingsElement.onclick = function(){
+		chrome.runtime.openOptionsPage()
+	}
 }
-topBarPopoutElement.onclick = function(){
-	back.createPushClipboardWindow(localStorage.selectedTab);
-	window.close();
+var topBarPopoutElement = document.getElementById("topBarPopout");
+if (topBarPopoutElement) {
+	topBarPopoutElement.onclick = function(){
+		back.createPushClipboardWindow(localStorage.selectedTab);
+		window.close();
+	}
 }
 var onlyTabToShow = getURLParameter("tab");
 if(onlyTabToShow){
@@ -166,9 +177,11 @@ if(onlyTabToShow){
 	if(localStorage.selectedTab){
 		selectTab(localStorage.selectedTab);
 	}else{
-		var idToShow = tabs[0].id.replace("tab-","");
-		selectTab(idToShow);
-		console.log("Showed tab " + idToShow + " by default");
+		if (tabs.length > 0) {
+			var idToShow = tabs[0].id.replace("tab-", "");
+			selectTab(idToShow);
+			console.log("Showed tab " + idToShow + " by default");
+		}
 	}
 }
 var topBarElement = document.getElementById("topBar");
